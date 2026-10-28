@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Therapist Schedule Template</title>
+    <link rel="stylesheet" href="Style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <h1>Clinician Template</h1>
+
+        <div class="field-group" id="accountPanel" hidden>
+          <p id="accountStatus" role="status" aria-live="polite"></p>
+          <form id="accountForm" hidden>
+            <label for="accountEmail">Email</label>
+            <input id="accountEmail" type="email" autocomplete="email" required maxlength="254" />
+            <label for="accountPassword">Password</label>
+            <input id="accountPassword" type="password" autocomplete="current-password" required minlength="12" />
+            <div class="button-row">
+              <button type="submit">Sign in</button>
+              <button type="button" id="createAccount">Create account</button>
+              <button type="button" id="resetPassword">Forgot password</button>
+            </div>
+          </form>
+          <div id="accountActions" hidden>
+            <div class="button-row">
+              <button id="refreshCloudTemplates">Refresh templates</button>
+              <button id="importLocalTemplates">Import browser templates</button>
+              <button id="signOut">Sign out</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="templateName">Template name</label>
+          <input id="templateName" placeholder="e.g. Standard week" maxlength="100" />
+          <div class="button-row">
+            <button id="saveTemplate">Save template</button>
+            <button id="newTemplate">New blank template</button>
+          </div>
+          <label for="savedTemplates">Saved templates</label>
+          <select id="savedTemplates"><option value="">Choose a template</option></select>
+          <div class="button-row">
+            <button id="loadTemplate" disabled>Load</button>
+            <button id="deleteTemplate" disabled>Delete saved template</button>
+          </div>
+          <p class="export-note" id="templateStorageNote">Your current schedule is saved automatically in this browser and restored when you return. Use Save template to keep named versions.</p>
+        </div>
+
+        <div class="sidebar-actions">
+          <div class="button-row">
+            <button class="primary" id="addAppointment">Add appointment</button>
+            <button id="resetSchedule">Reset selected day</button>
+          </div>
+          <div class="button-row">
+            <button id="removeAppointment" class="danger">Remove appointment</button>
+          </div>
+        </div>
+
+        <p id="actionStatus" role="status" aria-live="polite"></p>
+
+
+
+        <div class="field-group">
+          <label>Appointment lengths</label>
+          <div class="chip-group" id="durationOptions"></div>
+        </div>
+
+        <div class="field-group">
+          <label>Non-patient care time</label>
+          <div class="chip-group" id="nonPatientCareOptions"></div>
+        </div>
+
+        <div class="field-group">
+          <label>Lunch</label>
+          <div class="button-row">
+            <button id="addLunch30">Add 30 min lunch</button>
+            <button id="addLunch60">Add 60 min lunch</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Day schedule</label>
+          <div class="button-row">
+            <button id="copyDaySchedule">Copy selected day</button>
+            <button id="pasteDaySchedule">Paste to selected day</button>
+          </div>
+          <div class="schedule-copy-status" id="scheduleCopyStatus" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="field-group">
+          <label>Export</label>
+          <div class="export-actions">
+            <button id="exportExcel">Download Excel CSV</button>
+            <button id="exportPdf">Save as PDF</button>
+          </div>
+          <p class="export-note">CSV files open in Excel. Choose Save as PDF in the print dialog.</p>
+        </div>
+
+      </aside>
+
+      <main class="main-panel">
+        <div class="header-row">
+          <p class="eyebrow">Weekly template</p>
+        </div>
+
+        <div class="week-view-scroll">
+          <div class="week-header" id="weekHeader"></div>
+
+          <div class="calendar-wrap">
+            <div class="time-column" id="timeColumn"></div>
+            <div class="week-grid" id="weekGrid"></div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="summary-panel">
+        <h3>Capacity Summary</h3>
+        <div class="metric-group">
+          <div class="metric">
+            <span>Weekly work time</span>
+            <strong id="totalWorkValue">0 min</strong>
+          </div>
+          <div class="metric highlight">
+            <span>Weekly patient care</span>
+            <strong id="directCareValue">0 min</strong>
+          </div>
+          <div class="metric">
+            <span>Weekly non-patient care</span>
+            <strong id="totalNonPatientCareValue">0 min</strong>
+          </div>
+          <div class="metric">
+            <span>Weekly appointments</span>
+            <strong id="totalAppointmentsValue">0</strong>
+          </div>
+          <div class="metric highlight">
+            <span>Weekly available time</span>
+            <strong id="availableTimeValue">0 min</strong>
+          </div>
+          <div class="metric">
+            <span>Average daily appointments</span>
+            <strong id="averageDailyAppointmentsValue">0.00 / day</strong>
+          </div>
+        </div>
+
+        <div class="alert-box" id="alertBox">
+          Template is within capacity.
+        </div>
+      </aside>
+    </div>
+
+    <script src="app.js?v=autosave-1"></script>
+    <script src="cloud-config.js"></script>
+    <script src="account.js"></script>
+  </body>
+</html>
